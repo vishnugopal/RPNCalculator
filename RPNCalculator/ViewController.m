@@ -18,10 +18,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.display.text = @"";
 }
 
 - (void)viewDidUnload
 {
+    [self setDisplay:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -31,4 +34,22 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (Calculator *) brain
+{
+    if(!_brain) {
+        _brain = [[Calculator alloc] init];
+    }
+    
+    return _brain;
+}
+
+- (IBAction)numberPressed:(UIButton *)sender {
+    self.display.text = [self.display.text stringByAppendingString: sender.currentTitle];
+}
+
+- (IBAction)enterPressed {
+    NSNumber* enteredNumber = [NSNumber numberWithDouble:[self.display.text doubleValue]];
+    [self.brain addToStack:enteredNumber];
+    self.display.text = @"";
+}
 @end
