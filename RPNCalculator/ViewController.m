@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 
+@property (getter = isEnteringANumber, nonatomic) BOOL enteringANumber;
+
 @end
 
 @implementation ViewController
@@ -20,6 +22,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.display.text = @"";
+    self.enteringANumber = YES;
 }
 
 - (void)viewDidUnload
@@ -44,12 +47,30 @@
 }
 
 - (IBAction)numberPressed:(UIButton *)sender {
-    self.display.text = [self.display.text stringByAppendingString: sender.currentTitle];
+    if (self.isEnteringANumber) {
+        self.display.text = [self.display.text stringByAppendingString: sender.currentTitle];
+    } else {
+        self.display.text = sender.currentTitle;
+        self.enteringANumber = YES;
+    }
 }
 
 - (IBAction)enterPressed {
-    NSNumber* enteredNumber = [NSNumber numberWithDouble:[self.display.text doubleValue]];
-    [self.brain addToStack:enteredNumber];
-    self.display.text = @"";
+    if (self.isEnteringANumber) {
+        NSNumber *enteredNumber = [NSNumber numberWithDouble:[self.display.text doubleValue]];
+        [self.brain addToStack:enteredNumber];
+        self.enteringANumber = NO;
+    }
+}
+
+- (IBAction)operationPressed:(UIButton *)sender {
+    if (self.isEnteringANumber) {
+        [self enterPressed];
+    }
+    
+    NSString *operation = sender.currentTitle;
+    NSNumber *result = [self.brain performOperationOnStack:operation];
+    self.display.text = [result stringValue];
+    self.enteringANumber = NO;
 }
 @end

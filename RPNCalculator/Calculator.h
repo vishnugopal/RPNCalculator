@@ -12,6 +12,6 @@
 
 - (void) addToStack:(NSNumber *) number;
 
-- (void) performOperationOnStack:(NSString*) operation;
+- (NSNumber *) performOperationOnStack:(NSString*) operation;
 
 @end

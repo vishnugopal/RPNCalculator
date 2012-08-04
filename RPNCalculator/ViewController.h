@@ -15,7 +15,7 @@
 @property (nonatomic) Calculator *brain;
 
 - (IBAction)numberPressed:(UIButton *)sender;
-
 - (IBAction)enterPressed;
+- (IBAction)operationPressed:(UIButton *)sender;
 
 @end
