@@ -28,13 +28,10 @@
 - (void) addToStack:(NSNumber *) number
 {
     [self.stack addObject:number];
-    NSLog(@"Stack is now: %@", self.stack);
 }
 
 - (NSNumber *) performOperationOnStack:(NSString*) operation
-{
-    NSLog(@"Perform operation called: %@", operation);
-    
+{    
     double result = 0;
     double operand1 = [self popOperand];
     double operand2 = [self popOperand];
