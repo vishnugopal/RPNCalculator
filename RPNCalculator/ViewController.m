@@ -8,14 +8,16 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    Calculator *_brain;
+}
 
 @property (getter = isEnteringANumber, nonatomic) BOOL enteringANumber;
 
 @end
 
 @implementation ViewController
-
+@synthesize enteringANumber,brain=_brain,display;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
